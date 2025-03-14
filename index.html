@@ -9,15 +9,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evolution of the Honda Civic</title>
   
-<!-- This is where all the style choices for the UI are made. Styling for the webpage as well as the navbar -->
+  <!-- This is where I set up all the styling for the webpage -->
   <style>
+    /* I want the page to have a smooth scrolling effect and a clean, modern font */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       line-height: 1.6;
       scroll-behavior: smooth;
+      background-color: #111;
+      color: white;
+      text-align: center;
     }
 
+    /* This is the navbar that stays fixed at the top of the page */
     nav {
       position: fixed;
       top: 0;
@@ -28,17 +33,24 @@
       text-align: center;
       z-index: 1000;
     }
+
+    /* Styling for the navigation links */
     nav a {
       color: white;
       text-decoration: none;
       padding: 10px 15px;
       display: inline-block;
       font-size: 18px;
-    }
-    nav a:hover {
-      background: #007BFF;
+      transition: 0.3s;
     }
 
+    /* When the user hovers over the links, they change color */
+    nav a:hover {
+      background: #007BFF;
+      transform: scale(1.1);
+    }
+
+    /* This is the main section styling */
     section {
       padding: 80px 20px;
       min-height: 100vh;
@@ -47,18 +59,17 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      color: white;
       background-size: cover;
       background-position: center;
       position: relative;
     }
 
-    /* These are the 3 images i'm using in my webpage -- I put them in a folder called images and this is how im accessing them */
+    /* These are the images I’m using for each section */
     #section1 { background-image: url('images/early.jpg'); }
     #section2 { background-image: url('images/innovation.jpg'); }
     #section3 { background-image: url('images/modern.jpg'); }
 
-    /* Without this code its very ahrd to read the text I have so I found some resources on using section: before -- https://developer.mozilla.org/en-US/docs/Web/CSS/::before */
+    /* Without this, the text is hard to read over the images */
     section::before {
       content: "";
       position: absolute;
@@ -70,43 +81,131 @@
       z-index: 1;
     }
 
+    /* Makes sure all text and buttons appear above the overlay */
     section > * {
       position: relative;
       z-index: 2;
     }
 
+    /* Just styling the headings */
     h2 {
       margin-top: 0;
       font-size: 32px;
+    }
+
+    /* This is the button that toggles the fact box */
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    /* I made the button slightly darker when hovered over */
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* The fact box that appears when you click the button */
+    .fact-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+      width: 80%;
+      max-width: 600px;
+      text-align: left;
+      animation: fadeIn 0.5s ease-in-out;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Adding a fade-in effect to make it look smooth */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- This is the code using the styling fort the nav bar and creating 3 buttons for each of the car generations I want to highlight -->
+  <!-- This is my navbar so users can jump to different car generations -->
   <nav>
     <a href="#section1">1970s-1980s</a>
     <a href="#section2">1990s-2000s</a>
     <a href="#section3">2010s-2020s</a>
   </nav>
 
-  <!-- This is the code for the 1970s-1980s -->
+  <!-- First section for the early Civic years -->
   <section id="section1">
     <h2>1970s-1980s: The Early Years</h2>
     <p>The birth of the Honda Civic—an economical and reliable car for the world.</p>
+    <button onclick="toggleFacts('facts1')">More Facts</button>
+    <div class="fact-box" id="facts1">
+      <h3>1970s-1980s Facts</h3>
+      <ul>
+        <li>First introduced in 1972.</li>
+        <li>One of the first cars with CVCC technology.</li>
+        <li>Compact, fuel-efficient, and reliable.</li>
+      </ul>
+      <span class="speed-badge">Max Speed: 100 mph (160 km/h)</span>
+    </div>
   </section>
 
-  <!-- This is the code for the 1990s-2000s -->
+  <!-- Second section for the 90s-2000s era -->
   <section id="section2">
     <h2>1990s-2000s: Innovation & Performance</h2>
     <p>The Civic evolved into a performance icon while remaining a practical car.</p>
+    <button onclick="toggleFacts('facts2')">More Facts</button>
+    <div class="fact-box" id="facts2">
+      <h3>1990s-2000s Facts</h3>
+      <ul>
+        <li>The Civic Type R was introduced.</li>
+        <li>Became a favorite for street racing.</li>
+        <li>Better aerodynamics and VTEC engines.</li>
+      </ul>
+      <span class="speed-badge">Max Speed: 145 mph (233 km/h)</span>
+    </div>
   </section>
 
-  <!-- This is the code for the 2000-2010s -->
+  <!-- Third section for the modern Civic era -->
   <section id="section3">
     <h2>2010s-2020s: The Modern Era</h2>
     <p>The Civic leads in technology, safety, and hybrid innovation.</p>
+    <button onclick="toggleFacts('facts3')">More Facts</button>
+    <div class="fact-box" id="facts3">
+      <h3>2010s-2020s Facts</h3>
+      <ul>
+        <li>More focus on hybrid technology.</li>
+        <li>First turbocharged Civic.</li>
+        <li>Gained modern safety features.</li>
+      </ul>
+      <span class="speed-badge">Max Speed: 180 mph (290 km/h)</span>
+    </div>
   </section>
+
+  <!-- JavaScript to show/hide fact boxes -->
+  <script>
+    function toggleFacts(id) {
+      var factBox = document.getElementById(id);
+      factBox.style.display = (factBox.style.display === "block") ? "none" : "block";
+    }
+  </script>
 
 </body>
 </html>
+
