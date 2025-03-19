@@ -11,7 +11,7 @@
   
   <!-- This is where I set up all the styling for the webpage -->
   <style>
-    /* I want the page to have a smooth scrolling effect and a clean, modern font */
+    /* I want the page to have a smooth scrolling effect and a clean, modrn font */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -121,13 +121,55 @@
       border-radius: 12px;
       box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
       width: 80%;
-      max-width: 600px;
+      max-width: 2000px;
       text-align: left;
       animation: fadeIn 0.5s ease-in-out;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    .fact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .fact-card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      min-width: 160px;
+      max-width: 200px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    .fact-card:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Additional text that appears when a fact card is clicked */
+    .fact-detail {
+      display: none;
+      margin-top: 5px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 5px;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .fact-box h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
     /* Adding a fade-in effect to make it look smooth */
     @keyframes fadeIn {
       from {
@@ -139,6 +181,70 @@
         transform: translateY(0);
       }
     }
+
+    /* All the styling for the gallery/carousel */
+    #gallery-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .prev:hover, .next:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -148,21 +254,81 @@
     <a href="#section1">1970s-1980s</a>
     <a href="#section2">1990s-2000s</a>
     <a href="#section3">2010s-2020s</a>
+    <a href="javascript:void(0);" onclick="openGallery()">Gallery</a>
   </nav>
 
-  <!-- First section for the early Civic years -->
+<!-- This is how I got it to have a fullscreen ovrlay -->
+<div id="gallery-overlay">
+  <span class="close-btn" onclick="closeGallery()">✖</span>
+  
+  <!-- Carousel code that contains all the iamages  -->
+  <div class="carousel">
+    <button class="prev" onclick="prevSlide()">&#10094;</button> <!-- Left Arrow -->
+    
+    <div class="carousel-container">
+      <img class="gallery-img" src="images/gallery1.jpg" alt="Gallery Image 1">
+      <img class="gallery-img" src="images/gallery2.jpg" alt="Gallery Image 2">
+      <img class="gallery-img" src="images/gallery3.jpg" alt="Gallery Image 3">
+      <img class="gallery-img" src="images/gallery4.jpg" alt="Gallery Image 4">
+      <img class="gallery-img" src="images/gallery5.jpg" alt="Gallery Image 5">
+      <img class="gallery-img" src="images/gallery6.jpg" alt="Gallery Image 6">
+      <img class="gallery-img" src="images/gallery7.jpg" alt="Gallery Image 7">
+      <img class="gallery-img" src="images/gallery8.jpg" alt="Gallery Image 8">
+      <img class="gallery-img" src="images/gallery9.jpg" alt="Gallery Image 9">
+      <img class="gallery-img" src="images/gallery10.jpg" alt="Gallery Image 10">
+      <img class="gallery-img" src="images/gallery11.jpg" alt="Gallery Image 11">
+      <img class="gallery-img" src="images/gallery12.jpg" alt="Gallery Image 12">
+      <img class="gallery-img" src="images/gallery13.jpg" alt="Gallery Image 13">
+      <img class="gallery-img" src="images/gallery14.jpg" alt="Gallery Image 14">
+      <img class="gallery-img" src="images/gallery15.jpg" alt="Gallery Image 15">
+      <img class="gallery-img" src="images/gallery16.jpg" alt="Gallery Image 16">
+      <img class="gallery-img" src="images/gallery17.jpg" alt="Gallery Image 17">
+      <img class="gallery-img" src="images/gallery18.jpg" alt="Gallery Image 18">
+      <img class="gallery-img" src="images/gallery19.jpg" alt="Gallery Image 19">
+      <img class="gallery-img" src="images/gallery20.jpg" alt="Gallery Image 20">
+    </div>
+    
+    <button class="next" onclick="nextSlide()">&#10095;</button> <!-- Right Arrow -->
+  </div>
+</div>
+  
+<!-- First section for the early Civic years -->
   <section id="section1">
     <h2>1970s-1980s: The Early Years</h2>
     <p>The birth of the Honda Civic—an economical and reliable car for the world.</p>
     <button onclick="toggleFacts('facts1')">More Facts</button>
     <div class="fact-box" id="facts1">
       <h3>1970s-1980s Facts</h3>
-      <ul>
-        <li>First introduced in 1972.</li>
-        <li>One of the first cars with CVCC technology.</li>
-        <li>Compact, fuel-efficient, and reliable.</li>
-      </ul>
-      <span class="speed-badge">Max Speed: 100 mph (160 km/h)</span>
+      <div class="fact-container">
+        <div class="fact-card" onclick="toggleDetail(this)">
+          📅 Introduced in 1972.
+          <div class="fact-detail">The first Honda Civic was launched in 1972 as a fuel-efficient and reliable compact car, quickly gaining popularity worldwide.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🔬 First car with CVCC technology.
+          <div class="fact-detail">Honda’s CVCC (Compound Vortex Controlled Combustion) allowed the Civic to meet emissions standards without a catalytic converter.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          ⚡ Fuel-efficient & reliable.
+          <div class="fact-detail">The Civic became known for its outstanding fuel economy, achieving over 40 miles per gallon in early models.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🌍 Passed US emissions without a catalytic converter.
+          <div class="fact-detail">The 1975 Civic was one of the first cars to meet strict U.S. emissions regulations without requiring expensive catalytic converters.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🏎️ Max Speed: 100 mph (160 km/h).
+          <div class="fact-detail">Despite being a small compact car, early Civics could reach a top speed of 100 mph with a 1.2L engine.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🔧 1979 Civic introduced a 1.5L engine.
+          <div class="fact-detail">The second-generation Civic (1979) introduced a more powerful 1.5L engine, improving performance and fuel efficiency.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🚗 First 4WD Civic appeared in 1984.
+          <div class="fact-detail">Honda introduced the first four-wheel-drive (4WD) Civic in 1984, making it a practical choice for various terrains.</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -173,13 +339,36 @@
     <button onclick="toggleFacts('facts2')">More Facts</button>
     <div class="fact-box" id="facts2">
       <h3>1990s-2000s Facts</h3>
-      <ul>
-        <li>The Civic Type R was introduced.</li>
-        <li>Became a favorite for street racing.</li>
-        <li>Better aerodynamics and VTEC engines.</li>
-      </ul>
-      <span class="speed-badge">Max Speed: 145 mph (233 km/h)</span>
-    </div>
+      <div class="fact-container">
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🔥 First Civic Type R released.
+          <div class="fact-detail">The 1997 Civic Type R (EK9) was the first to wear the iconic red Honda badge, featuring a lightweight chassis and a high-revving B16B VTEC engine.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🏁 Became popular in street racing.
+          <div class="fact-detail">The 90s Civics, especially the EG and EK models, were lightweight and easy to modify, making them a favorite in street racing and tuning communities.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🚀 1999 Civic Si had 160 hp.
+          <div class="fact-detail">The U.S. 1999 Civic Si (EM1) was powered by a 1.6L B16A2 VTEC engine, producing 160 hp and revving up to 8,000 RPM.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          ⚡ First Hybrid Civic introduced in 2003.
+          <div class="fact-detail">Honda introduced the first hybrid Civic in 2003, offering improved fuel efficiency and paving the way for eco-friendly models.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🏎️ Max Speed: 145 mph (233 km/h).
+          <div class="fact-detail">The Civic Type R models of this era were able to reach speeds of 145 mph (233 km/h), setting new benchmarkers for FWD performance.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          💡 2006 Civic featured a futuristic digital dash.
+          <div class="fact-detail">The 8th-gen Civic (2006) introduced a unique two-tier digital dashboard, giving it a futuristic look unlike any other compact car.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🔧 2001 Civic Si debuted with K-series engine.
+          <div class="fact-detail">The 2001 Civic Si (EP3) came with the K20A3 engine, marking the transition from the legendary B-series engines to the more powerful and tunable K-series.</div>
+        </div>
+      </div>
   </section>
 
   <!-- Third section for the modern Civic era -->
@@ -189,13 +378,36 @@
     <button onclick="toggleFacts('facts3')">More Facts</button>
     <div class="fact-box" id="facts3">
       <h3>2010s-2020s Facts</h3>
-      <ul>
-        <li>More focus on hybrid technology.</li>
-        <li>First turbocharged Civic.</li>
-        <li>Gained modern safety features.</li>
-      </ul>
-      <span class="speed-badge">Max Speed: 180 mph (290 km/h)</span>
-    </div>
+      <div class="fact-container">
+        <div class="fact-card" onclick="toggleDetail(this)">
+          ⚡ First turbocharged Civic.
+          <div class="fact-detail">In 2016, Honda introduced the first turbocharged Civic in the 10th-generation lineup, featuring a 1.5L turbo engine for improved performance and efficiency.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🛡️ Added Honda Sensing safety features.
+          <div class="fact-detail">Honda Sensing, introduced in 2016, brought advanced safety features like collision mitigation braking, lane-keeping assist, and adaptive cruise control.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🏆 2016 Type R set Nürburgring record.
+          <div class="fact-detail">The 2016 Civic Type R (FK2) set a record at the Nürburgring for the fastest front-wheel-drive production car, proving Honda’s engineering excellence.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🚀 2023 Civic Type R has 315 hp.
+          <div class="fact-detail">The latest 2023 Civic Type R (FL5) boasts 315 hp from its 2.0L turbocharged engine, making it the most powerful Civic ever.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          📟 2022 Civic has a fully digital dashboard.
+          <div class="fact-detail">The 11th-gen Civic, released in 2022, introduced a sleek, fully digitlly instrument cluster for a modern and futuristic driving experience.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🏎️ Max Speed: 180 mph (290 km/h).
+          <div class="fact-detail">The 2023 Civic Type R can reach a top speed of 180 mph (290 km/h), making it one of the fastest Civics ever built.</div>
+        </div>
+        <div class="fact-card" onclick="toggleDetail(this)">
+          🛞 Civic Hatchback returned to the U.S. in 2017.
+          <div class="fact-detail">After years of absence, Honda brought back the Civic Hatchback to the U.S. market in 2017, offering a sportier and more practical alternative.</div>
+        </div>
+      </div>
   </section>
 
   <!-- JavaScript to show/hide fact boxes -->
@@ -205,6 +417,25 @@
       factBox.style.display = (factBox.style.display === "block") ? "none" : "block";
     }
   </script>
+    <script>
+      function toggleDetail(card) {
+        let detail = card.querySelector(".fact-detail");
+        detail.style.display = (detail.style.display === "block") ? "none" : "block";
+      }
+    </script>
+
+    <script>
+      function openGallery() {
+        document.getElementById("gallery-overlay").style.display = "flex"; // Change display to flex when opening
+      }
+
+      function closeGallery() {
+        document.getElementById("gallery-overlay").style.display = "none"; // Hide it when closing
+      }
+    </script>
+
+    <!-- connects my JavaScript file for the carousel -->
+    <script src="carousel.js"></script>
 
 </body>
 </html>
